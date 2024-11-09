@@ -46,7 +46,7 @@ fn process_args(file: &Option<String>, quality: &Option<f32>, replace: &bool, op
     let mut operate: bool = false;
     
     for path in paths {
-        let new = istant::now();
+        let new = Instant::now();
 
         let path = path.unwrap().path().display().to_string();
 
@@ -107,7 +107,7 @@ fn process_args(file: &Option<String>, quality: &Option<f32>, replace: &bool, op
             },
             &_ => todo!(),
         } 
-        println!("Time elapsed: {:?}", now.elapsed());
+        println!("Time elapsed: {:?}", new.elapsed());
     };
     if operate == false && file != &None {
         println!("No files match {:?}", file); 

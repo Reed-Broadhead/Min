@@ -86,7 +86,8 @@ fn process_args(file: &Option<String>, quality: &Option<f32>, replace: &bool, op
         match operation {
             "converting" => {
                 if vec!["png", "jpg"].contains(&img.format.to_lowercase().as_str()) { 
-                    img.to_webp();
+                  //  img.to_webp();
+                    img.new_to_webp();
                     operate = true
                 } 
             },
@@ -94,12 +95,14 @@ fn process_args(file: &Option<String>, quality: &Option<f32>, replace: &bool, op
                match &file_type {
                     Some(x) => {
                         if img.format.to_lowercase() == x.to_lowercase() {
-                            img.compress();
+                            println!("Compressing {:?}", img.path);
+                        //    img.compress();
                             operate = true
                         }
                     },
                     None => {
-                        img.compress();
+                        println!("Compressing {:?}", img.path);
+                       // img.compress();
                         operate = true 
                     }
                 } 

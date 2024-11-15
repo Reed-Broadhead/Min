@@ -51,16 +51,5 @@ impl ImgFile {
         let output_path = Path::new("").join(&self.name).with_extension("webp");
         img.save(output_path).unwrap();
 
-        //let encoder = WebPEncoder::new_with_quality(&mut img, self.quality);
-
-//        let img2 = ImageReader::new(Cursor::new(bytes)).decode().unwrap();
-        
-
-
-
-       // let mut reader = ImageReader::new(self.path.clone())
-       // .with_guessed_format()
-       // .expect("Cursor io never fails");
-
     } 
 }

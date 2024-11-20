@@ -27,19 +27,17 @@ enum Commands{
         replace: bool
     },
 }
-
 fn main() {
     let args = Args::parse();
 
     match &args.commands {
          Some(Commands::Convert {file, quality, replace}) => {
-               process_args( file, quality, replace, "converting", &None); 
+               process_args( file, quality, replace); 
          },
          None => (),
         }
-
 }
-fn process_args(file: &Option<String>, quality: &Option<f32>, replace: &bool, operation: &str, file_type: &Option<String>) {
+fn process_args(file: &Option<String>, quality: &Option<f32>, replace: &bool) {
 
     let paths = fs::read_dir("./").unwrap();
 
@@ -83,32 +81,9 @@ fn process_args(file: &Option<String>, quality: &Option<f32>, replace: &bool, op
             },
             None => (),
         }
-        match operation {
-            "converting" => {
-                if vec!["png", "jpg"].contains(&img.format.to_lowercase().as_str()) { 
-                  //  img.to_webp();
-                    img.new_to_webp();
-                    operate = true
-                } 
-            },
-            "compressing" => {
-               match &file_type {
-                    Some(x) => {
-                        if img.format.to_lowercase() == x.to_lowercase() {
-                            println!("Compressing {:?}", img.path);
-                        //    img.compress();
-                            operate = true
-                        }
-                    },
-                    None => {
-                        println!("Compressing {:?}", img.path);
-                       // img.compress();
-                        operate = true 
-                    }
-                } 
-                
-            },
-            &_ => todo!(),
+        if vec!["png", "jpg"].contains(&img.format.to_lowercase().as_str()) { 
+            img.to_webp();
+            operate = true
         } 
         println!("Time elapsed: {:?}", new.elapsed());
     };
